@@ -1,0 +1,333 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+header {
+  height: fit-content;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../imgs/clear.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 100%;
+}
+
+header h1 {
+  text-transform: capitalize;
+}
+
+header input {
+  width: 100%;
+  height: 5rem;
+  text-align: center;
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+
+.location-header {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  color: #fff;
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.location-header p {
+  font-size: 2.5rem;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.root {
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.root > img {
+  width: 100%;
+}
+
+.root > iframe {
+  width: 100%;
+  height: 40rem;
+}
+.slider-container {
+  width: 90%;
+  height: fit-content;
+  margin: auto;
+  position: relative;
+}
+
+.slider-container:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.date {
+  font-size: 2.5rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 1rem 1rem 0 0;
+}
+
+.scroll-left,
+.scroll-right {
+  position: absolute;
+  top: 10rem;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 17.9rem;
+  background-color: rgba(0, 0, 0, 0.253);
+  padding: 1rem;
+  z-index: 2;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.scroll-left:hover,
+.scroll-right:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.scroll-left {
+  left: 0;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.scroll-right {
+  right: 0;
+  border-radius: 0 1rem 1rem 0;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  overflow: scroll;
+  overflow-y: hidden;
+  margin: 0 auto 2rem auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 80%;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 0 0 1rem 1rem;
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  border: 2px solid black;
+  border-top: 0;
+  min-width: 100%;
+  min-height: 18rem;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+}
+
+.card-header > img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: auto;
+}
+
+.map-container {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  height: 400px;
+}
+
+footer {
+  background-color: rgb(166, 199, 232);
+  margin-top: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+footer > p:not(:first-of-type) {
+  margin-top: 2rem;
+}
+
+footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer img {
+  width: 8rem;
+  height: 8rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  border-radius: 25rem;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fcf;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fcf transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 800px) {
+  .card-container {
+    gap: 1%;
+  }
+
+  .card {
+    /*Figuring this out made me cry*/
+    min-width: 32.65%;
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .card:nth-last-of-type(3) {
+    margin-left: auto;
+  }
+
+  .card-header > img {
+    width: 8rem;
+    bottom: -1rem;
+  }
+
+  .card:last-of-type {
+    margin-right: 0;
+  }
+
+  .card:first-child:nth-last-child(1) {
+    /*hacky hacky... Select the first child WHEN it's also the last child. This allows us to remove the margin and allows the card to take up 100* of the container. */
+    margin: 0;
+  }
+
+  footer > div {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  footer img {
+    margin-right: 2rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  main {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 50%);
+    grid-auto-rows: min-content;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-header > img {
+    width: 10rem;
+    bottom: 0;
+  }
+
+  .slider-container {
+    max-height: 24.8rem;
+  }
+
+  .slider-container:first-of-type {
+    margin-top: 0;
+  }
+
+  .card-container {
+    max-height: 20rem;
+  }
+
+  .scroll-left,
+  .scroll-right {
+    top: 10.5rem;
+    height: 20.5rem;
+  }
+
+  .card {
+    min-width: 100%;
+    max-height: 20rem;
+    height: 100%;
+  }
+
+  iframe {
+    width: 90%;
+    margin: auto;
+    height: 40rem;
+  }
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+}
+/* @media (min-width:1025px) { big landscape tablets, laptops, and desktops } */
+/* @media (min-width:1281px) { hi-res laptops and desktops } */
