@@ -1,7 +1,7 @@
 import Weather from "./modules/weather.js";
 import Location from "./modules/location.js";
 import Maps from "./modules/maps.js";
-import { Unsplash } from "./modules/unsplash.js";
+
 import * as h from "./modules/html/htmlGenerator.js";
 import { debounce } from "./modules/utils.js";
 
@@ -9,20 +9,21 @@ const locationInput = document.getElementById("locationInput");
 const locHeader = document.getElementById("locHeader");
 const root = document.getElementById("root");
 
-let _weather, _map, _unsplash;
+let _weather, _map;
 
-navigator.geolocation.getCurrentPosition(async (pos) => {
-  root.innerHTML = h.genLoader();
+const showGeoLocation = () => {
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    root.innerHTML = h.genLoader();
 
-  _weather = new Weather(pos.coords);
-  _map = new Maps(pos.coords);
-  _unsplash = new Unsplash();
+    _weather = new Weather(pos.coords);
+    _map = new Maps(pos.coords);
 
-  manipulateDom(
-    { lat: pos.coords.latitude, lon: pos.coords.longitude },
-    "united kingdom"
-  );
-});
+    manipulateDom(
+      { lat: pos.coords.latitude, lon: pos.coords.longitude },
+      "united kingdom"
+    );
+  });
+};
 
 const handleInput = async (e) => {
   e.preventDefault();
@@ -33,13 +34,16 @@ const handleInput = async (e) => {
     .get("location")
     .trim();
 
-  const locationData = await Location.convertLocation(location);
+  location.length === 0 && showGeoLocation(); //If input field empty, show current location
+
+  const locationData =
+    location.length > 0 && (await Location.convertLocation(location));
+
+  !locationData && genResults(); //Couldn't find location so meme time
 
   if (locationData) {
     _weather.geo = locationData;
     manipulateDom(locationData, location);
-  } else {
-    genResults();
   }
 };
 
@@ -77,10 +81,6 @@ const manipulateDom = async ({ lat, lon }, location) => {
   genResults(_weather.sortWeather(o));
   _map.updateLocation(lat, lon);
 
-  const bgImage = await _unsplash.photo(location);
-  root.style.backgroundImage = `url(${
-    bgImage[Math.floor(Math.random() * bgImage.length)].urls.full
-  })`;
   addEventListeners();
 };
 
@@ -95,3 +95,5 @@ const genResults = (data) => {
     locHeader.innerHTML = h.locNotFound();
   }
 };
+
+showGeoLocation();

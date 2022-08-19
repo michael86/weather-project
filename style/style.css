@@ -10,6 +10,7 @@ html {
 
 body {
   font-size: 1.6rem;
+  background-color: rgb(181, 233, 233);
 }
 
 .background {
@@ -66,8 +67,6 @@ header input {
 
 .root {
   text-align: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   padding: 2rem 0;
   margin-bottom: 2rem;
 }
@@ -292,7 +291,7 @@ footer img {
 
   .card-header > img {
     width: 10rem;
-    bottom: 0;
+    bottom: -1.5rem;
   }
 
   .slider-container {
