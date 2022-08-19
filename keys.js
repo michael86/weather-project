@@ -1,3 +1,3 @@
 export const apiKeys = {
-  geoapify: "Add key here",
+  geoapify: "add key here",
 };
