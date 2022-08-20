@@ -53,12 +53,13 @@ header input {
   border-radius: 1rem;
   padding: 2.5rem;
   color: #fff;
-  width: 90%;
+  width: fit-content;
   margin: 1rem auto;
+  font-size: 2.8rem;
 }
 
 .location-header p {
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .align-center {
@@ -80,10 +81,14 @@ header input {
   height: 40rem;
 }
 .slider-container {
+  background-color: rgba(0, 0, 0, 0.5);
   width: 90%;
-  height: fit-content;
+  height: 26rem;
   margin: auto;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
   position: relative;
+  padding: 1rem 0 1rem 0;
 }
 
 .slider-container:first-of-type {
@@ -91,19 +96,19 @@ header input {
 }
 
 .date {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.7);
+
   border-radius: 1rem 1rem 0 0;
 }
 
 .scroll-left,
 .scroll-right {
   position: absolute;
-  top: 10rem;
+  top: 13rem;
   transform: translateY(-50%);
   width: 4rem;
-  height: 17.9rem;
+  height: 25.8rem;
   background-color: rgba(0, 0, 0, 0.253);
   padding: 1rem;
   z-index: 2;
@@ -134,7 +139,7 @@ header input {
   width: 100%;
   overflow: scroll;
   overflow-y: hidden;
-  margin: 0 auto 2rem auto;
+  margin: auto;
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -146,28 +151,23 @@ header input {
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.7);
   width: 80%;
   color: #fff;
-  padding: 1.5rem;
-  border-radius: 0 0 1rem 1rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-transform: capitalize;
-  border: 2px solid black;
-  border-top: 0;
   min-width: 100%;
-  min-height: 18rem;
+  min-height: 21rem;
   scroll-snap-align: start;
   text-align: center;
   position: relative;
 }
 
-.card-header > img {
+.card img {
   position: absolute;
-  bottom: 0;
+  bottom: -2.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 6rem;
+  width: 12rem;
   height: auto;
 }
 
@@ -183,6 +183,7 @@ footer {
   margin-top: 2rem;
   padding: 1.5rem;
   text-align: center;
+  font-size: 3rem;
 }
 
 footer > p:not(:first-of-type) {
@@ -191,14 +192,15 @@ footer > p:not(:first-of-type) {
 
 footer > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 footer img {
   width: 8rem;
   height: 8rem;
-  margin-top: 2rem;
+  margin: 2rem 2rem 0 0;
   cursor: pointer;
   border-radius: 25rem;
 }
@@ -248,7 +250,9 @@ footer img {
     /*Figuring this out made me cry*/
     min-width: 32.65%;
     width: 100%;
-    font-size: 2rem;
+    font-size: 2.8rem;
+    padding-top: 0.5rem;
+    border-right: 1px solid black;
   }
 
   .card:nth-last-of-type(3) {
@@ -267,15 +271,6 @@ footer img {
   .card:first-child:nth-last-child(1) {
     /*hacky hacky... Select the first child WHEN it's also the last child. This allows us to remove the margin and allows the card to take up 100* of the container. */
     margin: 0;
-  }
-
-  footer > div {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  footer img {
-    margin-right: 2rem;
   }
 }
 
@@ -308,14 +303,15 @@ footer img {
 
   .scroll-left,
   .scroll-right {
-    top: 10.5rem;
-    height: 20.5rem;
+    top: 12.4rem;
+    height: 24.7rem;
   }
 
   .card {
     min-width: 100%;
     max-height: 20rem;
     height: 100%;
+    border-right: none;
   }
 
   iframe {
@@ -328,5 +324,3 @@ footer img {
     height: 100%;
   }
 }
-/* @media (min-width:1025px) { big landscape tablets, laptops, and desktops } */
-/* @media (min-width:1281px) { hi-res laptops and desktops } */
