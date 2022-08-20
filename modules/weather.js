@@ -1,3 +1,5 @@
+import { apiKeys } from "../keys.js";
+
 export default class Weather {
   #lat;
   #lon;
@@ -8,7 +10,7 @@ export default class Weather {
     this.#lon = location.longitude;
     this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${
       this.#lat
-    }&lon=${this.#lon}&appid=f8e4e8af8be0c2ff651cc72f90d566b3`;
+    }&lon=${this.#lon}&appid=${apiKeys.openWeather}`;
   }
 
   async getWeather() {
@@ -60,6 +62,6 @@ export default class Weather {
   updateApi() {
     this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${
       this.#lat
-    }&lon=${this.#lon}&appid=f8e4e8af8be0c2ff651cc72f90d566b3`;
+    }&lon=${this.#lon}&appid=${apiKeys.openWeather}`;
   }
 }
