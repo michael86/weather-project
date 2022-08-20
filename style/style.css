@@ -72,7 +72,7 @@ header input {
   margin-bottom: 2rem;
 }
 
-.root > img {
+.meme-container > img {
   width: 100%;
 }
 
@@ -241,6 +241,10 @@ footer img {
 }
 
 @media (min-width: 800px) {
+  .meme-container > img {
+    width: 80%;
+  }
+
   .card-container {
     gap: 1%;
   }
@@ -274,6 +278,10 @@ footer img {
 }
 
 @media (min-width: 1100px) {
+  .location-header {
+    font-size: 1.8rem;
+  }
+
   main {
     display: grid;
     width: 100%;
@@ -285,6 +293,10 @@ footer img {
 
   .meme-container {
     grid-column: span 2;
+  }
+
+  .meme-container > img {
+    width: 50%;
   }
 
   .card-header > img {

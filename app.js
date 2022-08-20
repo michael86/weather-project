@@ -94,7 +94,7 @@ const genResults = (data) => {
       root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
     }
   } else {
-    root.innerHTML = h.genMeme("location");
+    root.innerHTML = h.genMeme();
     locHeader.innerHTML = h.locNotFound();
   }
 };

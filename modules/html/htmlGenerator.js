@@ -19,8 +19,8 @@ export function genHeader(o) {
   return createLocationInfo(o);
 }
 
-export function genMeme(meme) {
-  return getMeme(meme);
+export function genMeme() {
+  return getMeme();
 }
 
 export function genLoader() {
