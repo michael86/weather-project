@@ -1,4 +1,4 @@
-import { getMeme, invalidLoc } from "./errors.js";
+import { getMeme, invalidLoc, invalidChar } from "./errors.js";
 import { createSlider } from "./sliders.js";
 import { genCard } from "./card.js";
 import { createLocationInfo } from "./static.js";
@@ -19,18 +19,18 @@ export function genHeader(o) {
   return createLocationInfo(o);
 }
 
-export function genMeme() {
-  return getMeme();
+export function genMeme(e) {
+  return getMeme(e);
 }
 
 export function genLoader() {
-  return `<div class="align-center"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>`;
+  return `<div class="loader-container align-center"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>`;
 }
 
 export function locNotFound() {
   return invalidLoc();
 }
 
-export function showErrLatLon() {
-  return invalidLatLon();
+export function invalidChars() {
+  return invalidChar();
 }

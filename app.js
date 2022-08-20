@@ -19,10 +19,7 @@ const showGeoLocation = () => {
     _weather = new Weather(pos.coords);
     _map = new Maps(pos.coords);
 
-    manipulateDom(
-      { lat: pos.coords.latitude, lon: pos.coords.longitude },
-      "united kingdom"
-    );
+    manipulateDom({ lat: pos.coords.latitude, lon: pos.coords.longitude });
   });
 };
 
@@ -31,18 +28,19 @@ const handleInput = async (e) => {
 
   genLoading();
 
-  const location = new FormData(document.forms.locationInput)
-    .get("location")
-    .trim();
+  const location = new FormData(locationInput).get("location").trim();
 
-  console.log(userSchema.validate({}));
+  const validate = userSchema.validate({ location });
+  const er = validate.error;
 
-  location.length === 0 && showGeoLocation(); //If input field empty, show current location
+  er && invalidInput();
+
+  !er && location.length === 0 && showGeoLocation(); //If input field empty, show current location
 
   const locationData =
-    location.length > 0 && (await Location.convertLocation(location));
+    !er && location.length > 0 && (await Location.convertLocation(location)); //convert location
 
-  !locationData && genResults(); //Couldn't find location so meme time
+  !er && !locationData && genResults(); //Couldn't find location so meme time
 
   if (locationData) {
     _weather.geo = locationData;
@@ -65,8 +63,8 @@ const addEventListeners = () => {
   }
 };
 
-const scrollSlider = (t) => {
-  const { id, direction } = t.dataset;
+const scrollSlider = (target) => {
+  const { id, direction } = target.dataset;
 
   //The following 3 lines get all of the elements we require to transition the slider left and right
   //along with the width of a card so we can scroll left or right the required amount of px.
@@ -79,7 +77,7 @@ const scrollSlider = (t) => {
     : (cardContainer.scrollLeft += width);
 };
 
-const manipulateDom = async ({ lat, lon }, location) => {
+const manipulateDom = async ({ lat, lon }) => {
   const o = await _weather.getWeather();
   locHeader.innerHTML = h.genHeader(o.city);
   genResults(_weather.sortWeather(o));
@@ -95,7 +93,7 @@ const genResults = (data) => {
       root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
     }
   } else {
-    root.innerHTML = h.genMeme();
+    root.innerHTML = h.genMeme("not found");
     locHeader.innerHTML = h.locNotFound();
   }
 };
@@ -104,6 +102,11 @@ const genLoading = () => {
   locHeader.innerHTML = "";
   _map.hideMap();
   root.innerHTML = h.genLoader();
+};
+
+const invalidInput = () => {
+  root.innerHTML = h.genMeme("invalid");
+  locHeader.innerHTML = h.invalidChars();
 };
 
 showGeoLocation();

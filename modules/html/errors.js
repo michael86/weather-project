@@ -1,11 +1,21 @@
 import { genHeaderContainer } from "./static.js";
 
-export function getMeme(error) {
-  let meme;
+const chooseMeme = (e) => {
+  console.log(e);
+  switch (e) {
+    case "invalid":
+      return `../imgs/invalid.jpg`;
+    case "not found":
+      return `../imgs/lost.jpg`;
+    default:
+      break;
+  }
+};
 
+export function getMeme(e) {
   return `
   <div class="meme-container">
-    <img src="./imgs/location_not_found.jpg" alt="location not found" />
+    <img src="./imgs/${chooseMeme(e)}" alt="location not found" />
   </div>
   `;
 }
@@ -13,5 +23,11 @@ export function getMeme(error) {
 export function invalidLoc() {
   const html = `<h2>Something went wrong there!</h2>
           <p>We couldn't find the location provided. Try that again.</p>`;
+  return genHeaderContainer(html);
+}
+
+export function invalidChar() {
+  const html = `<h2>Something went wrong there!</h2>
+          <p>You provided invalid characters</p>`;
   return genHeaderContainer(html);
 }

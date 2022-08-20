@@ -283,6 +283,10 @@ footer img {
     font-size: 1.8rem;
   }
 
+  .loader-container {
+    grid-column: span 2;
+  }
+
   main {
     display: grid;
     width: 100%;
