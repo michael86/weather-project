@@ -7,7 +7,7 @@ import { debounce } from "./modules/utils.js";
 import { userSchema } from "./schema/schema.js";
 
 const locationInput = document.getElementById("locationInput");
-const locHeader = document.getElementById("locHeader");
+const locHeader = document.getElementById("locHeaderContainer");
 const root = document.getElementById("root");
 
 let _weather, _map;
@@ -29,7 +29,7 @@ const showGeoLocation = () => {
 const handleInput = async (e) => {
   e.preventDefault();
 
-  root.innerHTML = h.genLoader();
+  genLoading();
 
   const location = new FormData(document.forms.locationInput)
     .get("location")
@@ -53,6 +53,7 @@ const handleInput = async (e) => {
 const inputHandler = debounce(handleInput, 1000);
 
 locationInput.addEventListener("input", inputHandler);
+locationInput.addEventListener("submit", (e) => e.preventDefault()); //because debounce breaks form submission
 
 const addEventListeners = () => {
   const containers = document.getElementsByClassName("slider-container");
@@ -83,7 +84,7 @@ const manipulateDom = async ({ lat, lon }, location) => {
   locHeader.innerHTML = h.genHeader(o.city);
   genResults(_weather.sortWeather(o));
   _map.updateLocation(lat, lon);
-
+  _map.showMap();
   addEventListeners();
 };
 
@@ -97,6 +98,12 @@ const genResults = (data) => {
     root.innerHTML = h.genMeme();
     locHeader.innerHTML = h.locNotFound();
   }
+};
+
+const genLoading = () => {
+  locHeader.innerHTML = "";
+  _map.hideMap();
+  root.innerHTML = h.genLoader();
 };
 
 showGeoLocation();

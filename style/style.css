@@ -175,6 +175,7 @@ header input {
   width: 90%;
   margin: auto;
   height: 400px;
+  display: none;
 }
 
 footer {
