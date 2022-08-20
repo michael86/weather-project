@@ -284,6 +284,10 @@ footer img {
     align-items: center;
   }
 
+  .meme-container {
+    grid-column: span 2;
+  }
+
   .card-header > img {
     width: 10rem;
     bottom: -1.5rem;
