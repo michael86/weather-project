@@ -4,6 +4,6 @@ A simple weather site showing the consumption of multiple apis alongside framewo
 
 ## to do
 
-- [] Finish styling
+- [x] Finish styling
 - [] Add Joi for user input validation
 - [] refactor (if needed)
