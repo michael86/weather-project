@@ -4,6 +4,7 @@ import Maps from "./modules/maps.js";
 
 import * as h from "./modules/html/htmlGenerator.js";
 import { debounce } from "./modules/utils.js";
+import { userSchema } from "./schema/schema.js";
 
 const locationInput = document.getElementById("locationInput");
 const locHeader = document.getElementById("locHeader");
@@ -33,6 +34,8 @@ const handleInput = async (e) => {
   const location = new FormData(document.forms.locationInput)
     .get("location")
     .trim();
+
+  console.log(userSchema.validate({}));
 
   location.length === 0 && showGeoLocation(); //If input field empty, show current location
 

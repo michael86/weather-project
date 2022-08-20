@@ -1,11 +1,3 @@
-export function invalidLatLon() {
-  return `
-        <img src="./imgs/lat_lon.gif" alt="Lat Lon Invalid" /> 
-        <h2>Invalid Latitude and Longitude<h2>
-        <p>You provided an invalid set of latitude and longitude, try that again</p>
-    `;
-}
-
 export function getMeme(error) {
   let meme;
 
@@ -17,7 +9,11 @@ export function getMeme(error) {
       break;
   }
 
-  return `<img src="${meme}" alt="location not found" />`;
+  return `
+  <div class="meme-container">
+    <img src="${meme}" alt="location not found" />
+  </div>
+  `;
 }
 
 export function invalidLoc() {

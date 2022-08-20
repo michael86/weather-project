@@ -1,4 +1,4 @@
-import { getMeme, invalidLatLon, invalidLoc } from "./errors.js";
+import { getMeme, invalidLoc } from "./errors.js";
 import { createSlider } from "./sliders.js";
 import { genCard } from "./card.js";
 import { createLocationInfo } from "./static.js";
