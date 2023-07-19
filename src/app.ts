@@ -4,11 +4,11 @@ import Maps from "./modules/maps.js";
 
 import * as h from "./modules/html/htmlGenerator.js";
 import { debounce } from "./modules/utils.js";
-import { userSchema } from "./schema/schema.js";
+import { userSchema } from "./schemas/schema.js";
 
-const locationInput = document.getElementById("locationInput");
-const locHeader = document.getElementById("locHeaderContainer");
-const root = document.getElementById("root");
+const locationInput = <HTMLFormElement>document.getElementById("locationInput")!;
+const locHeader = <HTMLDivElement>document.getElementById("locHeaderContainer")!;
+const root = <HTMLDivElement>document.getElementById("root")!;
 
 let _weather, _map;
 
@@ -28,17 +28,20 @@ const handleInput = async (e) => {
 
   genLoading();
 
-  const location = new FormData(locationInput).get("location").trim();
+  const data: FormData = new FormData(locationInput);
+
+  const location = data.get("location") as string;
+  location.trim();
 
   const validate = userSchema.validate({ location });
+
   const er = validate.error;
 
   er && invalidInput();
 
   !er && location.length === 0 && showGeoLocation(); //If input field empty, show current location
 
-  const locationData =
-    !er && location.length > 0 && (await Location.convertLocation(location)); //convert location
+  const locationData = !er && location.length > 0 && (await Location.convertLocation(location)); //convert location
 
   !er && !locationData && genResults(); //Couldn't find location so meme time
 
@@ -56,10 +59,7 @@ locationInput.addEventListener("submit", (e) => e.preventDefault()); //because d
 const addEventListeners = () => {
   const containers = document.getElementsByClassName("slider-container");
   for (const i of containers) {
-    i.addEventListener(
-      "click",
-      (e) => e.target.dataset.direction && scrollSlider(e.target)
-    );
+    i.addEventListener("click", (e) => e.target.dataset.direction && scrollSlider(e.target));
   }
 };
 
@@ -77,7 +77,12 @@ const scrollSlider = (target) => {
     : (cardContainer.scrollLeft += width);
 };
 
-const manipulateDom = async ({ lat, lon }) => {
+type location = {
+  lat: number;
+  lon: number;
+};
+
+const manipulateDom = async ({ lat, lon }: location) => {
   const o = await _weather.getWeather();
   locHeader.innerHTML = h.genHeader(o.city);
   genResults(_weather.sortWeather(o));
@@ -86,16 +91,18 @@ const manipulateDom = async ({ lat, lon }) => {
   addEventListeners();
 };
 
-const genResults = (data) => {
+const genResults = (data: object | null) => {
   if (data) {
     root.innerHTML = "";
     for (const d in data) {
       root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
     }
-  } else {
-    root.innerHTML = h.genMeme("not found");
-    locHeader.innerHTML = h.locNotFound();
+
+    return;
   }
+
+  root.innerHTML = h.genMeme("not found");
+  locHeader.innerHTML = h.locNotFound();
 };
 
 const genLoading = () => {

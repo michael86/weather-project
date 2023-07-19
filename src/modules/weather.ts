@@ -1,16 +1,25 @@
-import { apiKeys } from "../keys.js";
+import { apiKeys } from "../keys";
+import {
+  GenObject,
+  GenObjectRes,
+  Location,
+  SortWeather,
+  SortWeatherRes,
+} from "../schemas/interfaces";
+import axios from "axios";
 
 export default class Weather {
-  #lat;
-  #lon;
-  #api;
+  #lat: number;
+  #lon: number;
+  #api: string;
 
-  constructor(location) {
+  constructor(location: Location) {
     this.#lat = location.latitude;
     this.#lon = location.longitude;
-    this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${
-      this.#lat
-    }&lon=${this.#lon}&appid=${apiKeys.openWeather}`;
+
+    this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.#lat}&lon=${
+      this.#lon
+    }&appid=${apiKeys.openWeather}`;
   }
 
   async getWeather() {
@@ -19,14 +28,14 @@ export default class Weather {
       console.log(`error: ${e.message}`);
     });
 
-    return res.status === 200 ? res.data : null;
+    return res?.status === 200 ? res.data : null;
   }
 
-  sortWeather(o) {
+  sortWeather(o: SortWeather): SortWeatherRes {
     //This generates a sorted object of arrays arranged by date and time.
-    const res = {};
+    const res: SortWeatherRes = {};
 
-    const genObject = (i) => {
+    const genObject = (i: GenObject): GenObjectRes => {
       return {
         date: i.dt * 1000,
         desc: i.weather[0].description,
@@ -39,9 +48,10 @@ export default class Weather {
       };
     };
 
-    o.list.forEach((i) => {
+    o.list.forEach((i: GenObject) => {
       const date = new Date(i.dt * 1000); //Make a new date object
       const day = date.getDate(); //Get this dates date
+
       !res[day] ? (res[day] = []) : null; //Check to see if our object has a key for this iterations date. If not, create it.
       res[day].push(genObject(i)); //Push this iteration to the res object and ensure it goes in the correct nested array
     });
@@ -53,15 +63,15 @@ export default class Weather {
     return { lat: this.#lat, lng: this.#lon };
   }
 
-  set geo({ lat, lon }) {
+  set geo({ lat, lng }) {
     this.#lat = lat;
-    this.#lon = lon;
+    this.#lon = lng;
     this.updateApi();
   }
 
   updateApi() {
-    this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${
-      this.#lat
-    }&lon=${this.#lon}&appid=${apiKeys.openWeather}`;
+    this.#api = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.#lat}&lon=${
+      this.#lon
+    }&appid=${apiKeys.openWeather}`;
   }
 }
