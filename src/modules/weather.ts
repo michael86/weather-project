@@ -5,7 +5,7 @@ import {
   Location,
   SortWeather,
   SortWeatherRes,
-} from "../schemas/interfaces";
+} from "../schemas/WeatherInterfaces";
 import axios from "axios";
 
 export default class Weather {

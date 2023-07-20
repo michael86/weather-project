@@ -1,7 +1,9 @@
+import { Location } from "../schemas/WeatherInterfaces";
+
 export default class Maps {
   #Bing;
   #container;
-  constructor({ latitude: lat, longitude: lon }) {
+  constructor({ latitude: lat, longitude: lon }: Location) {
     this.#Bing = new Microsoft.Maps.Map("#mapContainer");
     this.#container = document.getElementById("mapContainer");
 
