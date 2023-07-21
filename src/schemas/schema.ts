@@ -1,3 +1,5 @@
+import joi from 'joi'
+
 export const userSchema = joi.object({
   location: joi
     .string()

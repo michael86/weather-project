@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "axios": "^1.4.0"
+    "axios": "^1.4.0",
+    "bingmaps": "^2.0.3",
+    "joi": "^17.9.2"
   }
 }

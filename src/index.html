@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather | View weather for a given location.</title>
+    <link rel="stylesheet" href="/style/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+      integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Ag691BIB6v2QNPdyta3-U4J03HY8oDlYwmgrZGy5hYlLDchtqaGsIgRF0JRx-XXW"></script>
+    <!--For some reason if we set to type module, or use async/defer then the Microsoft class isn't accessable in external js files-->
+
+    <script src="https://cdn.jsdelivr.net/npm/joi@17.6.0/dist/joi-browser.min.js"></script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="align-center">
+        <h1>The Weather channel</h1>
+        <form id="locationInput">
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Search by county, address or postcode"
+          />
+        </form>
+        <div id="locHeaderContainer"></div>
+      </div>
+    </header>
+
+    <main id="root" class="root"></main>
+
+    <div id="mapContainer" class="map-container"></div>
+
+    <footer>
+      <p>
+        Created by
+        <a href="https://github.com/michael86" target="_blank">
+          michael hodgson
+        </a>
+      </p>
+      <p>Frameworks used</p>
+      <div class="flex">
+        <a href="https://www.npmjs.com/package/axios" target="_blank">
+          <img src="./imgs/axios.png" alt="axios" />
+        </a>
+        <a href="https://www.npmjs.com/package/joi" target="_blank">
+          <img src="./imgs/joiLogo.jpg" alt="Joi" />
+        </a>
+      </div>
+      <p>Apis used:</p>
+      <div class="flex">
+        <a href="https://openweathermap.org/" target="_blank">
+          <img src="./imgs/openweather.png" alt="open weather" />
+        </a>
+        <a href="https://www.geoapify.com/" target="_blank">
+          <img src="./imgs/geoapify.png" alt="geoapify" />
+        </a>
+        <a
+          href="https://www.microsoft.com/en-us/maps/choose-your-bing-maps-api"
+          target="_blank"
+        >
+          <img src="./imgs/Bing-Maps.webp" alt="bing maps" />
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>

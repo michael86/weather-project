@@ -1,16 +1,18 @@
 import { Location } from "../schemas/WeatherInterfaces";
-
+/// <reference path="types/MicrosoftMaps/CustomMapStyles.d.ts" />
+/// <reference path="types/MicrosoftMaps/Microsoft.Maps.d.ts" />
+/// <reference path="types/MicrosoftMaps/Microsoft.Maps.All.d.ts" />
 export default class Maps {
   #Bing;
   #container;
   constructor({ latitude: lat, longitude: lon }: Location) {
     this.#Bing = new Microsoft.Maps.Map("#mapContainer");
-    this.#container = document.getElementById("mapContainer");
+    this.#container = document.getElementById("mapContainer")!;
 
     this.updateLocation(lat, lon);
   }
 
-  updateLocation(lat, lon) {
+  updateLocation(lat: number, lon: number) {
     this.#Bing.setView({
       mapTypeId: Microsoft.Maps.MapTypeId.aerial,
       center: new Microsoft.Maps.Location(lat, lon),
