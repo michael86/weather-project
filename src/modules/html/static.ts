@@ -11,6 +11,6 @@ export function createLocationInfo(o) {
   return genHeaderContainer(html);
 }
 
-export function genHeaderContainer(html) {
+export function genHeaderContainer(html: string) {
   return `<div class="location-header" id="locHeader">${html} </div>`;
 }

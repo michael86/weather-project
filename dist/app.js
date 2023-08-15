@@ -67,7 +67,7 @@ const handleInput = (e) => __awaiter(void 0, void 0, void 0, function* () {
     !er && !locationData && genResults(); //Couldn't find location so meme time
     if (locationData) {
         _weather.geo = locationData;
-        manipulateDom(locationData, location);
+        manipulateDom(locationData);
     }
 });
 const inputHandler = (0, utils_js_1.debounce)(handleInput, 1000);
@@ -76,7 +76,10 @@ locationInput.addEventListener("submit", (e) => e.preventDefault()); //because d
 const addEventListeners = () => {
     const containers = document.getElementsByClassName("slider-container");
     for (const i of containers) {
-        i.addEventListener("click", (e) => e.target.dataset.direction && scrollSlider(e.target));
+        i.addEventListener("click", (e) => {
+            const { dataset } = e.target;
+            dataset.direction && scrollSlider(e.target);
+        });
     }
 };
 const scrollSlider = (target) => {
@@ -101,9 +104,10 @@ const manipulateDom = ({ lat, lon }) => __awaiter(void 0, void 0, void 0, functi
 const genResults = (data) => {
     if (data) {
         root.innerHTML = "";
-        for (const d in data) {
-            root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
-        }
+        for (const d in data)
+            if (data[d] && data[d][0]) {
+                root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
+            }
         return;
     }
     root.innerHTML = h.genMeme("not found");

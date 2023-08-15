@@ -12,6 +12,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Maps_Bing, _Maps_container;
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference path="types/MicrosoftMaps/CustomMapStyles.d.ts" />
+/// <reference path="types/MicrosoftMaps/Microsoft.Maps.d.ts" />
+/// <reference path="types/MicrosoftMaps/Microsoft.Maps.All.d.ts" />
 class Maps {
     constructor({ latitude: lat, longitude: lon }) {
         _Maps_Bing.set(this, void 0);

@@ -22,7 +22,7 @@ function genId() {
 }
 exports.genId = genId;
 function commaDelimate(n) {
-    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return n.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 exports.commaDelimate = commaDelimate;
 function debounce(fn, d) {

@@ -3,7 +3,7 @@ import { createSlider } from "./sliders.js";
 import { genCard } from "./card.js";
 import { createLocationInfo } from "./static.js";
 
-export function genSlider(html, unix) {
+export function genSlider(html: string, unix: number) {
   return createSlider(html, unix);
 }
 

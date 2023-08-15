@@ -8,14 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const keys_js_1 = require("../keys.js");
+const axios_1 = __importDefault(require("axios"));
 class Location {
     static convertLocation(location) {
         return __awaiter(this, void 0, void 0, function* () {
             location = location.toLowerCase();
             const callApi = (l) => __awaiter(this, void 0, void 0, function* () {
-                return axios.get(`https://api.geoapify.com/v1/geocode/search?text=${l}&lang=en&limit=10&type=city&format=json&apiKey=${keys_js_1.apiKeys.geoapify}`);
+                return axios_1.default.get(`https://api.geoapify.com/v1/geocode/search?text=${l}&lang=en&limit=10&type=city&format=json&apiKey=${keys_js_1.apiKeys.geoapify}`);
             });
             //Res data normmally contains an array of locations around the world. So attempt to find correct index for search term.
             //Could expand on this an allow user to search for country as well. Also need to filter by result type for postcodes.
@@ -34,7 +38,7 @@ class Location {
     static reverseGeo({ lat, lon }) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=${keys_js_1.apiKeys.geoapify}`;
-            const res = yield axios.get(url);
+            const res = yield axios_1.default.get(url);
             return res.status === 200 ? res.data.results[0] : null;
         });
     }

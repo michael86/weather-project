@@ -1,9 +1,9 @@
 import { genId, getLocaleDate } from "../utils.js";
 
-export function createSlider(html, unix) {
+export function createSlider(html: string, unix: number) {
   const id = genId();
 
-  const createArrow = (direction, path) => {
+  const createArrow = (direction: string, path: string) => {
     return `<svg data-id="${id}" data-direction="${direction}" class="${direction}" viewBox="0 0 100 100"><path stroke-width="2" stroke-linecap="round" fill="#fff" stroke="#fff" d="${path}"/></svg>`;
   };
 

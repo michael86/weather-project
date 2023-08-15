@@ -10,7 +10,7 @@ const locationInput = <HTMLFormElement>document.getElementById("locationInput")!
 const locHeader = <HTMLDivElement>document.getElementById("locHeaderContainer")!;
 const root = <HTMLDivElement>document.getElementById("root")!;
 
-let _weather, _map;
+let _weather: Weather, _map: Maps;
 
 const showGeoLocation = () => {
   navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -23,7 +23,7 @@ const showGeoLocation = () => {
   });
 };
 
-const handleInput = async (e) => {
+const handleInput = async (e: InputEvent) => {
   e.preventDefault();
 
   genLoading();
@@ -47,7 +47,7 @@ const handleInput = async (e) => {
 
   if (locationData) {
     _weather.geo = locationData;
-    manipulateDom(locationData, location);
+    manipulateDom(locationData);
   }
 };
 
@@ -58,19 +58,23 @@ locationInput.addEventListener("submit", (e) => e.preventDefault()); //because d
 
 const addEventListeners = () => {
   const containers = document.getElementsByClassName("slider-container");
+
   for (const i of containers) {
-    i.addEventListener("click", (e) => e.target.dataset.direction && scrollSlider(e.target));
+    i.addEventListener("click", (e) => {
+      const { dataset } = <HTMLElement>e.target;
+      dataset.direction && scrollSlider(<HTMLElement>e.target);
+    });
   }
 };
 
-const scrollSlider = (target) => {
+const scrollSlider = (target: HTMLElement) => {
   const { id, direction } = target.dataset;
 
   //The following 3 lines get all of the elements we require to transition the slider left and right
   //along with the width of a card so we can scroll left or right the required amount of px.
-  const slider = document.getElementById(id);
-  const cardContainer = slider.querySelector(".card-container");
-  const width = cardContainer.querySelector(".card").clientWidth;
+  const slider = <HTMLDivElement>document.getElementById(id)!;
+  const cardContainer = <HTMLDivElement>slider.querySelector(".card-container")!;
+  const width = <number>cardContainer.querySelector(".card")!.clientWidth;
 
   direction.includes("left")
     ? (cardContainer.scrollLeft -= width)
@@ -91,12 +95,13 @@ const manipulateDom = async ({ lat, lon }: location) => {
   addEventListeners();
 };
 
-const genResults = (data: object | null) => {
+const genResults = (data?: GenResults): undefined => {
   if (data) {
     root.innerHTML = "";
-    for (const d in data) {
-      root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
-    }
+    for (const d in data)
+      if (data[d] && data[d][0]) {
+        root.innerHTML += h.genSlider(h.genCards(data[d]), data[d][0].date);
+      }
 
     return;
   }
@@ -105,7 +110,7 @@ const genResults = (data: object | null) => {
   locHeader.innerHTML = h.locNotFound();
 };
 
-const genLoading = () => {
+const genLoading = (): undefined => {
   locHeader.innerHTML = "";
   _map.hideMap();
   root.innerHTML = h.genLoader();

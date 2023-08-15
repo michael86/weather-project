@@ -60,20 +60,19 @@ class Weather {
             };
         };
         o.list.forEach((i) => {
-            console.log(i);
-            // const date = new Date(i.dt * 1000); //Make a new date object
-            // const day = date.getDate(); //Get this dates date
-            // !res[day] ? (res[day] = []) : null; //Check to see if our object has a key for this iterations date. If not, create it.
-            // res[day].push(genObject(i as GenObject)); //Push this iteration to the res object and ensure it goes in the correct nested array
+            const date = new Date(i.dt * 1000); //Make a new date object
+            const day = date.getDate(); //Get this dates date
+            !res[day] ? (res[day] = []) : null; //Check to see if our object has a key for this iterations date. If not, create it.
+            res[day].push(genObject(i)); //Push this iteration to the res object and ensure it goes in the correct nested array
         });
         return res;
     }
     get geo() {
         return { lat: __classPrivateFieldGet(this, _Weather_lat, "f"), lng: __classPrivateFieldGet(this, _Weather_lon, "f") };
     }
-    set geo({ lat, lon }) {
+    set geo({ lat, lng }) {
         __classPrivateFieldSet(this, _Weather_lat, lat, "f");
-        __classPrivateFieldSet(this, _Weather_lon, lon, "f");
+        __classPrivateFieldSet(this, _Weather_lon, lng, "f");
         this.updateApi();
     }
     updateApi() {

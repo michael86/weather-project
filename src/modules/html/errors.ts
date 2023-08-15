@@ -1,6 +1,6 @@
 import { genHeaderContainer } from "./static.js";
 
-const chooseMeme = (e) => {
+const chooseMeme = (e: string) => {
   console.log(e);
   switch (e) {
     case "invalid":
@@ -12,7 +12,7 @@ const chooseMeme = (e) => {
   }
 };
 
-export function getMeme(e) {
+export function getMeme(e: string) {
   return `
   <div class="meme-container">
     <img src="./imgs/${chooseMeme(e)}" alt="location not found" />
