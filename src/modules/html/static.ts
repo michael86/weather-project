@@ -1,6 +1,17 @@
 import { commaDelimate, getLocaleTime } from "../utils.js";
 
-export function createLocationInfo(o) {
+interface CreateLocationInfo {
+  coord: { lat: number; lon: number };
+  country: string;
+  id: number;
+  name: string;
+  population: string;
+  sunrise: number;
+  sunset: number;
+  timezone: number;
+}
+
+export function createLocationInfo(o: CreateLocationInfo) {
   const { country, name, population, sunrise, sunset } = o;
 
   const html = `<h2>${name} - ${country}</h2>
