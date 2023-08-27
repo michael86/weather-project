@@ -40,5 +40,5 @@ class Maps {
         __classPrivateFieldGet(this, _Maps_container, "f").style.display = "block";
     }
 }
-exports.default = Maps;
 _Maps_Bing = new WeakMap(), _Maps_container = new WeakMap();
+exports.default = Maps;

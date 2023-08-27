@@ -1,6 +1,17 @@
 import { convertTempToCels, getLocaleTime } from "../utils.js";
 
-export function genCard(d) {
+interface D {
+  date: number;
+  desc: string;
+  feelsLike: number;
+  humidity: number;
+  icon: string;
+  temp: number;
+  windDirection: number;
+  windStrength: number;
+}
+
+export function genCard(d: D) {
   return `
     <div class="card">
         <div class="card-body">

@@ -6,8 +6,12 @@ import * as h from "./modules/html/htmlGenerator.js";
 import { debounce } from "./modules/utils.js";
 import { userSchema } from "./schemas/schema.js";
 
-const locationInput = <HTMLFormElement>document.getElementById("locationInput")!;
-const locHeader = <HTMLDivElement>document.getElementById("locHeaderContainer")!;
+const locationInput = <HTMLFormElement>(
+  document.getElementById("locationInput")!
+);
+const locHeader = <HTMLDivElement>(
+  document.getElementById("locHeaderContainer")!
+);
 const root = <HTMLDivElement>document.getElementById("root")!;
 
 let _weather: Weather, _map: Maps;
@@ -41,7 +45,8 @@ const handleInput = async (e: InputEvent) => {
 
   !er && location.length === 0 && showGeoLocation(); //If input field empty, show current location
 
-  const locationData = !er && location.length > 0 && (await Location.convertLocation(location)); //convert location
+  const locationData =
+    !er && location.length > 0 && (await Location.convertLocation(location)); //convert location
 
   !er && !locationData && genResults(); //Couldn't find location so meme time
 
@@ -68,12 +73,15 @@ const addEventListeners = () => {
 };
 
 const scrollSlider = (target: HTMLElement) => {
-  const { id, direction } = target.dataset;
+  const id: string = target.dataset.id!;
+  const direction: string = target.dataset.direction!;
 
   //The following 3 lines get all of the elements we require to transition the slider left and right
   //along with the width of a card so we can scroll left or right the required amount of px.
   const slider = <HTMLDivElement>document.getElementById(id)!;
-  const cardContainer = <HTMLDivElement>slider.querySelector(".card-container")!;
+  const cardContainer = <HTMLDivElement>(
+    slider.querySelector(".card-container")!
+  );
   const width = <number>cardContainer.querySelector(".card")!.clientWidth;
 
   direction.includes("left")

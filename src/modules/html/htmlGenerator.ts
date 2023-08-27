@@ -7,7 +7,20 @@ export function genSlider(html: string, unix: number) {
   return createSlider(html, unix);
 }
 
-export function genCards(data) {
+interface GenCard {
+  date: number;
+  desc: string;
+  feelsLike: number;
+  humidity: number;
+  icon: string;
+  temp: number;
+  windDirection: number;
+  windStrength: number;
+}
+
+interface GenCard extends Array<GenCard> {}
+
+export function genCards(data: GenCard) {
   let cards = "";
   for (const i in data) {
     cards += genCard(data[i]);
@@ -15,11 +28,22 @@ export function genCards(data) {
   return cards;
 }
 
-export function genHeader(o) {
+interface GenHeader {
+  coord: { lat: number; lon: number };
+  country: string;
+  id: number;
+  name: string;
+  population: number;
+  sunrise: number;
+  sunset: number;
+  timezone: number;
+}
+
+export function genHeader(o: GenHeader) {
   return createLocationInfo(o);
 }
 
-export function genMeme(e) {
+export function genMeme(e: string) {
   return getMeme(e);
 }
 

@@ -41,8 +41,8 @@ const maps_js_1 = __importDefault(require("./modules/maps.js"));
 const h = __importStar(require("./modules/html/htmlGenerator.js"));
 const utils_js_1 = require("./modules/utils.js");
 const schema_js_1 = require("./schemas/schema.js");
-const locationInput = document.getElementById("locationInput");
-const locHeader = document.getElementById("locHeaderContainer");
+const locationInput = (document.getElementById("locationInput"));
+const locHeader = (document.getElementById("locHeaderContainer"));
 const root = document.getElementById("root");
 let _weather, _map;
 const showGeoLocation = () => {
@@ -83,11 +83,12 @@ const addEventListeners = () => {
     }
 };
 const scrollSlider = (target) => {
-    const { id, direction } = target.dataset;
+    const id = target.dataset.id;
+    const direction = target.dataset.direction;
     //The following 3 lines get all of the elements we require to transition the slider left and right
     //along with the width of a card so we can scroll left or right the required amount of px.
     const slider = document.getElementById(id);
-    const cardContainer = slider.querySelector(".card-container");
+    const cardContainer = (slider.querySelector(".card-container"));
     const width = cardContainer.querySelector(".card").clientWidth;
     direction.includes("left")
         ? (cardContainer.scrollLeft -= width)

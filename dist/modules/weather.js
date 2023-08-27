@@ -79,5 +79,5 @@ class Weather {
         __classPrivateFieldSet(this, _Weather_api, `https://api.openweathermap.org/data/2.5/forecast?lat=${__classPrivateFieldGet(this, _Weather_lat, "f")}&lon=${__classPrivateFieldGet(this, _Weather_lon, "f")}&appid=${keys_1.apiKeys.openWeather}`, "f");
     }
 }
-exports.default = Weather;
 _Weather_lat = new WeakMap(), _Weather_lon = new WeakMap(), _Weather_api = new WeakMap();
+exports.default = Weather;
